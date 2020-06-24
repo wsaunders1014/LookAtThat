@@ -1,0 +1,17 @@
+{
+  "name": "look-at-that",
+  "title": "Look At That",
+  "description": "Press 'P' to pull all players' views to where your mouse is pointed!",
+  "authors": [{"name":"Will Saunders","email":"willsaunders1014@gmail.com" }],
+  "version": "0.0.1",
+  "minimumCoreVersion": "0.6.2",
+  "compatibleCoreVersion":"0.6.4",
+  "scripts": [
+  	"look-at-that.js"
+  ],
+  "socket": true,
+  "changelog":"https://raw.githubusercontent.com/wsaunders1014/LookAtThat/master/README.md",
+  "url":"https://github.com/wsaunders1014/LookAtThat",
+  "manifest":"https://raw.githubusercontent.com/wsaunders1014/LookAtThat/master/module.json",
+  "download":"https://github.com/wsaunders1014/LookAtThat/archive/master.zip"
+}
