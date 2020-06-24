@@ -13,16 +13,16 @@ class PullFocus {
 	    });
 	}
 	static async listen(){
-		console.log('pullfocus listen')
+		
 		game.socket.on('module.look-at-that',async data => {
-			console.log('pullFocus test',data, canvas.scene._viewPosition.scale);
+			
 			canvas.animatePan(data)
 		});
 	}
 	static async pullFocus(data){
 		data.scale =  canvas.scene._viewPosition.scale;
 		data.duration = game.settings.get('look-at-that','speed');
-		console.log('pullfocus',data.x,data.y, canvas.scene._viewPosition.scale,data.duration)
+		
 		game.socket.emit('module.look-at-that',data)
 	}
 }
@@ -30,17 +30,16 @@ class PullFocus {
 var keyDown = (e)=>{
 	//console.log(e.which)
 	console.log('pullfocus keyDown')
-	if(e.which == 80){
+	if(e.which == 80 && game.user.isGM && overCanvas){
+	
+		var mouse = canvas.app.renderer.plugins.interaction.mouse.getLocalPosition(canvas.tokens);
+		//console.log(mouse);
+	 	PullFocus.pullFocus(mouse);
 		
-		if(game.user.isGM){
-			var mouse = canvas.app.renderer.plugins.interaction.mouse.getLocalPosition(canvas.tokens);
-			//console.log(mouse);
-		 	PullFocus.pullFocus(mouse);
-		}
 	}
 }
 //var pullFocus = () => console.log('pullFocus',mouseX,mouseY);
-	
+var overCanvas = true;	
 	
 window.addEventListener('keydown', keyDown);
 
@@ -56,8 +55,14 @@ Hooks.on('canvasReady', ()=>{
 	 CONFIG.debug.hooks = true;
 	 //game.socket.on('pullFocus',pullFocus)
 	// game.socket.on('pullFocus',pullFocus);
+	canvas.stage.on('mouseover',(e)=>{
+	
+		overCanvas = true;
+	})
+	canvas.stage.on('mouseout',(e)=>{
+		
+		overCanvas = false;
+	})
 })
 
-
-console.log('test')
 
